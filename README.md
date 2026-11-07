@@ -173,7 +173,7 @@ with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showe
 *Expected result: [what you saw, e.g. DHCP Request and ACK packets between the VM and the DHCP server at [IP]].*
 
 <p align="center">
-<img src="12-dhcp-traffic.png" width="80%" alt="Wireshark showing DHCP traffic after ipconfig /renew"/>
+<img src="DHCP Traffic.png" width="80%" alt="Wireshark showing DHCP traffic after ipconfig /renew"/>
 </p>
 
 **15. Observe DNS traffic**
