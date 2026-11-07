@@ -97,9 +97,13 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 *Expected result: [what you saw, e.g. replies from Google's IP, and the matching ICMP entries in Wireshark].*
 
 <p align="center">
-<img src="06-icmp-ping-google.png" width="80%" alt="Wireshark showing ICMP traffic to a public website"/>
+<img src="ICMP Ping from Windows to Google.com.png" width="80%" alt="Wireshark showing ICMP traffic to a public website"/>
 </p>
 
-**What I observed:** [1-2 sentences, e.g. each ping produces one request and one reply, and the
-reply source is the Ubuntu VM's private IP, which confirms both VMs can reach each other inside the virtual network.]
+**What I observed:** Each ping produced one ICMP echo request from the Windows VM
+(172.16.0.4) and one echo reply from the Linux VM (172.16.0.5), for a total of
+4 requests and 4 replies. The two VMs can communicate because they share a virtual
+network and subnet, and Azure's default NSG rules allow traffic between resources in
+the same virtual network. I also compared the MAC addresses in the Ethernet II header
+with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showed up in Wireshark.  
 <br />
