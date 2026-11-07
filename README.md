@@ -152,4 +152,48 @@ with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showe
 </p>
 
 **What I observed:** [your own explanation, see below]
+
+## Part 4: Observe Network Protocol Traffic
+
+**13. Observe SSH traffic**
+1. In the Windows VM, open Wireshark and start a capture, then set the display filter to `ssh`.
+2. Open PowerShell and run `ssh labuser@[linux-vm private IP]`, accept the host fingerprint prompt, and enter the password.
+3. Run `[commands you typed]`, then type `exit` and press **Enter**.
+
+*Expected result: SSH packets appear in Wireshark as soon as the connection starts and with every command typed. [What you saw, e.g. the payload is encrypted, so the commands themselves aren't readable.]*
+
+<p align="center">
+<img src=".png" width="80%" alt="Wireshark showing SSH traffic between the VMs"/>
+</p>
+
+**14. Observe DHCP traffic**
+1. In Wireshark, change the display filter to `dhcp`.
+2. Open PowerShell as administrator and run `ipconfig /renew`.
+
+*Expected result: [what you saw, e.g. DHCP Request and ACK packets between the VM and the DHCP server at [IP]].*
+
+<p align="center">
+<img src="12-dhcp-traffic.png" width="80%" alt="Wireshark showing DHCP traffic after ipconfig /renew"/>
+</p>
+
+**15. Observe DNS traffic**
+1. In Wireshark, change the display filter to `dns`.
+2. In a command prompt, run `nslookup google.com` and `nslookup disney.com`.
+
+*Expected result: [what you saw, e.g. a DNS query and response for each name, with the resolved IP addresses and the DNS server used].*
+
+<p align="center">
+<img src="13-dns-traffic.png" width="80%" alt="Wireshark showing DNS queries and responses for google.com and disney.com"/>
+</p>
+
+**16. Observe RDP traffic**
+1. In Wireshark, change the display filter to `tcp.port == 3389`.
+
+*Expected result: [what you saw, e.g. a continuous stream of packets even with no activity].*
+
+<p align="center">
+<img src="14-rdp-traffic.png" width="80%" alt="Wireshark showing continuous RDP traffic on port 3389"/>
+</p>
+
+**What I observed:** [your own explanation, see below]
 <br />
