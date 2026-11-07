@@ -65,18 +65,14 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 2. On the **Overview** page, locate the **Private IP address**: `[IP]`.
 
 <p align="center">
-<img src="03-linux-vm-private-ip.png" width="80%" alt="Private IP address of linux-vm"/>
+<img src="Linux Private IP Address.png" width="80%" alt="Private IP address of linux-vm"/>
 </p>
 
 **5. Connect to the Windows VM with Remote Desktop**
 1. Open `windows-vm` in the portal and click **Connect > RDP**.
-2. [Describe how you connected: downloaded the RDP file / used mstsc with the public IP], then sign in with the username and password you created.
+2. Then sign in with the username and password you created.
 
-*Expected result: the Windows 10 desktop opens in the Remote Desktop window.*
-
-<p align="center">
-<img src="04-rdp-connected.png" width="80%" alt="Remote Desktop session into windows-vm"/>
-</p>
+*Expected result: the Windows 11 desktop opens in the Remote Desktop window.*
 
 **6. Install Wireshark**
 1. Inside the VM, open a browser and go to `https://www.wireshark.org`, then download the Windows installer.
