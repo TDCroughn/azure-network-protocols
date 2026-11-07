@@ -148,7 +148,7 @@ with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showe
 3. Press **Ctrl+C** in the command prompt to stop the ping.
 
 <p align="center">
-<img src="10-ping-restored.png" width="80%" alt="Ping replies resuming after the NSG rule was removed"/>
+<img src="Ping Restarts After Deny Rule is Deleted.png" width="80%" alt="Ping replies resuming after the NSG rule was removed"/>
 </p>
 
 **What I observed:** [your own explanation, see below]
