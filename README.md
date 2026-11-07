@@ -31,7 +31,7 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 3. Set **Subscription** to Subscription 1, **Resource group name** `RG-Network-Activities`, and **Region** to `(US) East US 2`.
 4. Click **Review + create**, then **Create**.
 
-*Expected result: the resource group appears in your Resource groups list.*
+*Expected result: The resource group appears in your Resource groups list.*
 
 <p align="center">
 <img src="Resource Group Created.png" width="80%" alt="Creating the resource group"/>
@@ -44,7 +44,7 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 4. Networking tab: let Azure create a new **virtual network** and **subnet** (vnet-eastus2-1 (RG-Network-Activites), snet-eastus2-2 - 172.16.0.0/24).
 5. Click **Review + create**, then **Create**.
 
-*Expected result: deployment completes and `windows-vm` shows as Running.*
+*Expected result: Deployment completes and `windows-vm` shows as Running.*
 
 **3. Create the Ubuntu VM**
 1. Click **Create > Azure virtual machine** again.
@@ -72,7 +72,7 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 1. Open `windows-vm` in the portal and click **Connect > RDP**.
 2. Then sign in with the username and password you created.
 
-*Expected result: the Windows 11 desktop opens in the Remote Desktop window.*
+*Expected result: The Windows 11 desktop opens in the Remote Desktop window.*
 
 **6. Install Wireshark**
 1. Inside the VM, open a browser and go to `https://www.wireshark.org`, then download the Windows installer.
@@ -85,7 +85,7 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 2. In the display filter bar, type `icmp` and press **Enter**.
 3. Open Command Prompt and run `ping 172.16.0.5`.
 
-*Expected result: the command prompt shows four replies, and Wireshark lists matching **Echo (ping) request** and **Echo (ping) reply** pairs between `172.16.0.4` and `172.16.0.5`.*
+*Expected result: The command prompt shows four replies, and Wireshark lists matching **Echo (ping) request** and **Echo (ping) reply** pairs between `172.16.0.4` and `172.16.0.5`.*
 
 <p align="center">
 <img src="ICMP Ping From Windows to Linux.png" width="80%" alt="Wireshark showing ICMP echo requests and replies to the Ubuntu VM"/>
@@ -94,7 +94,7 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 **8. Ping a public website**
 1. In the command prompt, run `ping www.google.com`.
 
-*Expected result: [what you saw, e.g. replies from Google's IP, and the matching ICMP entries in Wireshark].*
+*Expected result: The command prompt resolves the name to an IP address and shows replies from it, and Wireshark (with the `icmp` filter) shows echo request and reply pairs between the Windows VM and that public IP.*
 
 <p align="center">
 <img src="ICMP Ping from Windows to Google.com.png" width="80%" alt="Wireshark showing ICMP traffic to a public website"/>
@@ -113,7 +113,7 @@ with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showe
 1. In the Windows VM, open Command Prompt and run `ping 172.16.0.5 -t`.
 2. Keep Wireshark running with the `icmp` filter.
 
-*Expected result: the command prompt shows steady replies and Wireshark shows request/reply pairs.*
+*Expected result: The command prompt shows steady replies and Wireshark shows request/reply pairs.*
 
 <p align="center">
 <img src="Non-Stop Ping From Windows to Linux.png" width="80%" alt="Continuous ping with replies from linux-vm"/>
@@ -124,7 +124,7 @@ with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showe
 2. Click **Add inbound port rule** and enter: Source `Any`, Source port ranges `*`, Destination `Any`, Service `Custom`, Destination port ranges `*`, Protocol `ICMP`, Action `Deny`, Priority `290`, Name `DenyICMP`.
 3. Click **Add**.
 
-*Expected result: the new deny rule appears in the inbound rules list above the default rules.*
+*Expected result: The new deny rule appears in the inbound rules list above the default rules.*
 
 <p align="center">
 <img src="Deny ICMP Rule.png" width="80%" alt="Creating the inbound deny rule for ICMP"/>
@@ -133,7 +133,7 @@ with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showe
 **11. Observe the blocked traffic**
 1. Return to the Windows VM and watch the ping window and Wireshark.
 
-*Expected result: [what you saw, e.g. after about a minute the ping shows "Request timed out" and Wireshark shows echo requests with no replies].*
+*Expected result: The ping showed "Request timed out" and Wireshark shows echo requests with no replies.*
 
 <p align="center">
 <img src="Ping Stopped by IMCP Deny Rule.png" width="80%" alt="Ping timing out and Wireshark showing requests without replies"/>
@@ -143,7 +143,7 @@ with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showe
 1. Back in the NSG, [delete the deny rule / change its action to Allow].
 2. Return to the Windows VM and watch the ping window and Wireshark.
 
-*Expected result: [what you saw, e.g. replies resume in the command prompt and Wireshark].*
+*Expected result: Replies resume in the command prompt and Wireshark.*
 
 3. Press **Ctrl+C** in the command prompt to stop the ping.
 
@@ -151,16 +151,16 @@ with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showe
 <img src="Ping Restarts After Deny Rule is Deleted.png" width="80%" alt="Ping replies resuming after the NSG rule was removed"/>
 </p>
 
-**What I observed:** [your own explanation, see below]
+**What I observed:** After removing the rule, replies resumed almost immediately. PowerShell went back to showing replies from 172.16.0.5, and Wireshark showed matching request and reply pairs again. This confirms the NSG rule was the only thing blocking ICMP, and that rule changes apply without restarting either VM.
 
 ## Part 4: Observe Network Protocol Traffic
 
 **13. Observe SSH traffic**
 1. In the Windows VM, open Wireshark and start a capture, then set the display filter to `ssh`.
-2. Open PowerShell and run `ssh labuser@[linux-vm private IP]`, accept the host fingerprint prompt, and enter the password.
-3. Run `[commands you typed]`, then type `exit` and press **Enter**.
+2. Open PowerShell and run `ssh labuser@172.16.0.5`, accept the host fingerprint prompt, and enter the password.
+3. Run `various basic Linux commands`, then type `exit` and press **Enter**.
 
-*Expected result: SSH packets appear in Wireshark as soon as the connection starts and with every command typed. [What you saw, e.g. the payload is encrypted, so the commands themselves aren't readable.]*
+*Expected result: SSH packets appear in Wireshark as soon as the connection starts and with every command typed. The payload is encrypted, so the commands themselves aren't readable.*
 
 <p align="center">
 <img src="Traffic from SSH.png" width="80%" alt="Wireshark showing SSH traffic between the VMs"/>
@@ -170,7 +170,7 @@ with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showe
 1. In Wireshark, change the display filter to `dhcp`.
 2. Open PowerShell as administrator and run `ipconfig /renew`.
 
-*Expected result: [what you saw, e.g. DHCP Request and ACK packets between the VM and the DHCP server at [IP]].*
+*Expected result: DHCP Request and ACK packets between the VM and the DHCP server.*
 
 <p align="center">
 <img src="DHCP Traffic.png" width="80%" alt="Wireshark showing DHCP traffic after ipconfig /renew"/>
@@ -180,7 +180,7 @@ with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showe
 1. In Wireshark, change the display filter to `dns`.
 2. In a command prompt, run `nslookup google.com` and `nslookup disney.com`.
 
-*Expected result: [what you saw, e.g. a DNS query and response for each name, with the resolved IP addresses and the DNS server used].*
+*Expected result: DNS query and response for each name, with the resolved IP addresses and the DNS server used.*
 
 <p align="center">
 <img src="DNS Traffic.png" width="80%" alt="Wireshark showing DNS queries and responses for google.com and disney.com"/>
@@ -189,11 +189,11 @@ with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showe
 **16. Observe RDP traffic**
 1. In Wireshark, change the display filter to `tcp.port == 3389`.
 
-*Expected result: [what you saw, e.g. a continuous stream of packets even with no activity].*
+*Expected result: A continuous stream of packets even with no activity.*
 
 <p align="center">
-<img src="14-rdp-traffic.png" width="80%" alt="Wireshark showing continuous RDP traffic on port 3389"/>
+<img src="RDP Traffic.png" width="80%" alt="Wireshark showing continuous RDP traffic on port 3389"/>
 </p>
 
-**What I observed:** [your own explanation, see below]
+**What I observed:** Packets flowed constantly between the Linux-VM (172.16.0.5) and The Windows-VM (172.16.0.5) on TCP port 3389, even while I was idle. This happens because RDP streams the remote desktop to my screen in real time, along with my keyboard and mouse input, so the connection is always carrying data. Unlike ICMP, SSH, DHCP, or DNS, which only produce traffic when I run a command, RDP traffic never stops while the session is open.
 <br />
