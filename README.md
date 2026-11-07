@@ -18,8 +18,8 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 
 <h2>Operating Systems Used </h2>
 
-- Windows 10 (21H2)
-- Ubuntu Server 20.04
+- Windows 11 (215H2)
+- Ubuntu Server 24.04
 
 <h2>High-Level Steps</h2>
 
@@ -34,14 +34,14 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 *Expected result: the resource group appears in your Resource groups list.*
 
 <p align="center">
-<img src="01-resource-group.png" width="80%" alt="Creating the resource group"/>
+<img src="Resource Group Created.png" width="80%" alt="Creating the resource group"/>
 </p>
 
-**2. Create the Windows 10 VM**
+**2. Create the Windows 11 VM**
 1. Search for `Virtual machines`, click **Create > Azure virtual machine**.
-2. Basics tab: choose your resource group, name it `windows-vm`, set the region, and select the **Windows 10** image.
-3. Choose a VM size ([size]), set a username and password, and (if offered) confirm the licensing box.
-4. Networking tab: let Azure create a new **virtual network** and **subnet** ([name], [address range]).
+2. Basics tab: choose your resource group, name it `windows-vm`, set the region, and select the **Windows 11** image.
+3. Choose a VM size (Standard_D2als_v6 - 2 vcpus, 4 GiB memory), set a username and password, and confirm the licensing box.
+4. Networking tab: let Azure create a new **virtual network** and **subnet** (vnet-eastus2-1 (RG-Network-Activites), snet-eastus2-2 - 172.16.0.0/24).
 5. Click **Review + create**, then **Create**.
 
 *Expected result: deployment completes and `windows-vm` shows as Running.*
