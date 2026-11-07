@@ -183,7 +183,7 @@ with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showe
 *Expected result: [what you saw, e.g. a DNS query and response for each name, with the resolved IP addresses and the DNS server used].*
 
 <p align="center">
-<img src="13-dns-traffic.png" width="80%" alt="Wireshark showing DNS queries and responses for google.com and disney.com"/>
+<img src="DNS Traffic.png" width="80%" alt="Wireshark showing DNS queries and responses for google.com and disney.com"/>
 </p>
 
 **16. Observe RDP traffic**
