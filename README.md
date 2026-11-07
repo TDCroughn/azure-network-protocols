@@ -163,7 +163,7 @@ with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showe
 *Expected result: SSH packets appear in Wireshark as soon as the connection starts and with every command typed. [What you saw, e.g. the payload is encrypted, so the commands themselves aren't readable.]*
 
 <p align="center">
-<img src=".png" width="80%" alt="Wireshark showing SSH traffic between the VMs"/>
+<img src="Traffic from SSH.png" width="80%" alt="Wireshark showing SSH traffic between the VMs"/>
 </p>
 
 **14. Observe DHCP traffic**
