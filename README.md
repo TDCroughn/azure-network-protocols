@@ -55,6 +55,55 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 *Expected result: both VMs are in the same virtual network. Confirm by opening each VM's **Networking** page, or open the virtual network's **Connected devices** list.*
 
 <p align="center">
-<img src="02-vms-same-vnet.png" width="80%" alt="Both VMs in the same virtual network"/>
+<img src="VMs in the Same Subnet.png" width="80%" alt="Both VMs in the same virtual network"/>
 </p>
+
+## Part 2: Observe ICMP Traffic
+
+**4. Find the Ubuntu VM's private IP**
+1. In the Azure portal, open `linux-vm`.
+2. On the **Overview** page, locate the **Private IP address**: `[IP]`.
+
+<p align="center">
+<img src="03-linux-vm-private-ip.png" width="80%" alt="Private IP address of linux-vm"/>
+</p>
+
+**5. Connect to the Windows VM with Remote Desktop**
+1. Open `windows-vm` in the portal and click **Connect > RDP**.
+2. [Describe how you connected: downloaded the RDP file / used mstsc with the public IP], then sign in with the username and password you created.
+
+*Expected result: the Windows 10 desktop opens in the Remote Desktop window.*
+
+<p align="center">
+<img src="04-rdp-connected.png" width="80%" alt="Remote Desktop session into windows-vm"/>
+</p>
+
+**6. Install Wireshark**
+1. Inside the VM, open a browser and go to `https://www.wireshark.org`, then download the Windows installer.
+2. Run the installer, accept the defaults (including Npcap), and finish the setup.
+
+*Expected result: Wireshark opens from the Start menu.*
+
+**7. Capture ICMP traffic to the Ubuntu VM**
+1. Open Wireshark and double-click the **[adapter name]** interface to start a capture.
+2. In the display filter bar, type `icmp` and press **Enter**.
+3. Open Command Prompt and run `ping [linux-vm private IP]`.
+
+*Expected result: the command prompt shows four replies, and Wireshark lists matching **Echo (ping) request** and **Echo (ping) reply** pairs between `[windows-vm IP]` and `[linux-vm IP]`.*
+
+<p align="center">
+<img src="05-icmp-ping-linux-vm.png" width="80%" alt="Wireshark showing ICMP echo requests and replies to the Ubuntu VM"/>
+</p>
+
+**8. Ping a public website**
+1. In the command prompt, run `ping www.google.com`.
+
+*Expected result: [what you saw, e.g. replies from Google's IP, and the matching ICMP entries in Wireshark].*
+
+<p align="center">
+<img src="06-icmp-ping-google.png" width="80%" alt="Wireshark showing ICMP traffic to a public website"/>
+</p>
+
+**What I observed:** [1-2 sentences, e.g. each ping produces one request and one reply, and the
+reply source is the Ubuntu VM's private IP, which confirms both VMs can reach each other inside the virtual network.]
 <br />
