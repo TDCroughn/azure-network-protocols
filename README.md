@@ -23,33 +23,38 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 
 <h2>High-Level Steps</h2>
 
-- Step 1
-- Step 2
-- Step 3
-- Step 4
+## Part 1: Create the Virtual Machines
 
-<h2>Actions and Observations</h2>
+**1. Create a resource group**
+1. Sign in at `https://portal.azure.com`.
+2. In the search bar, type `Resource groups` and select it, then click **Create**.
+3. Set **Subscription** to Subscription 1, **Resource group name** `RG-Network-Activities`, and **Region** to `(US) East US 2`.
+4. Click **Review + create**, then **Create**.
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
+*Expected result: the resource group appears in your Resource groups list.*
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<p align="center">
+<img src="01-resource-group.png" width="80%" alt="Creating the resource group"/>
 </p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+**2. Create the Windows 10 VM**
+1. Search for `Virtual machines`, click **Create > Azure virtual machine**.
+2. Basics tab: choose your resource group, name it `windows-vm`, set the region, and select the **Windows 10** image.
+3. Choose a VM size ([size]), set a username and password, and (if offered) confirm the licensing box.
+4. Networking tab: let Azure create a new **virtual network** and **subnet** ([name], [address range]).
+5. Click **Review + create**, then **Create**.
+
+*Expected result: deployment completes and `windows-vm` shows as Running.*
+
+**3. Create the Ubuntu VM**
+1. Click **Create > Azure virtual machine** again.
+2. Basics tab: same resource group and region, name it `linux-vm`, select **Ubuntu Server**, and set **Authentication type** to **Password** with username `labuser`.
+3. Networking tab: select the **same virtual network and subnet** that the Windows VM created.
+4. Click **Review + create**, then **Create**.
+
+*Expected result: both VMs are in the same virtual network. Confirm by opening each VM's **Networking** page, or open the virtual network's **Connected devices** list.*
+
+<p align="center">
+<img src="02-vms-same-vnet.png" width="80%" alt="Both VMs in the same virtual network"/>
 </p>
 <br />
