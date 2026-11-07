@@ -136,7 +136,7 @@ with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showe
 *Expected result: [what you saw, e.g. after about a minute the ping shows "Request timed out" and Wireshark shows echo requests with no replies].*
 
 <p align="center">
-<img src="Ping Stopped by ICMP Rule.png" width="80%" alt="Ping timing out and Wireshark showing requests without replies"/>
+<img src="Ping Stopped by IMCP Deny Rule.png" width="80%" alt="Ping timing out and Wireshark showing requests without replies"/>
 </p>
 
 **12. Restore ICMP and stop the ping**
