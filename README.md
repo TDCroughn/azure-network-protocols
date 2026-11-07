@@ -116,7 +116,7 @@ with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showe
 *Expected result: the command prompt shows steady replies and Wireshark shows request/reply pairs.*
 
 <p align="center">
-<img src="07-continuous-ping-working.png" width="80%" alt="Continuous ping with replies from linux-vm"/>
+<img src="Non-Stop Ping From Windows to Linux.png" width="80%" alt="Continuous ping with replies from linux-vm"/>
 </p>
 
 **10. Block inbound ICMP on the Ubuntu VM's NSG**
