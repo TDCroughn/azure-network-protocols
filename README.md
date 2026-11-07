@@ -127,7 +127,7 @@ with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showe
 *Expected result: the new deny rule appears in the inbound rules list above the default rules.*
 
 <p align="center">
-<img src="08-nsg-deny-icmp-rule.png" width="80%" alt="Creating the inbound deny rule for ICMP"/>
+<img src="Deny ICMP Rule.png" width="80%" alt="Creating the inbound deny rule for ICMP"/>
 </p>
 
 **11. Observe the blocked traffic**
@@ -136,7 +136,7 @@ with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showe
 *Expected result: [what you saw, e.g. after about a minute the ping shows "Request timed out" and Wireshark shows echo requests with no replies].*
 
 <p align="center">
-<img src="09-ping-blocked.png" width="80%" alt="Ping timing out and Wireshark showing requests without replies"/>
+<img src="Ping Stopped by ICMP Rule.png" width="80%" alt="Ping timing out and Wireshark showing requests without replies"/>
 </p>
 
 **12. Restore ICMP and stop the ping**
