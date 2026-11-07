@@ -106,4 +106,50 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 network and subnet, and Azure's default NSG rules allow traffic between resources in
 the same virtual network. I also compared the MAC addresses in the Ethernet II header
 with `ipconfig /all` on Windows and `ip link` on Linux to verify that they showed up in Wireshark.  
+
+## Part 3: Block and Restore ICMP with a Network Security Group
+
+**9. Start a continuous ping**
+1. In the Windows VM, open Command Prompt and run `ping 172.16.0.5 -t`.
+2. Keep Wireshark running with the `icmp` filter.
+
+*Expected result: the command prompt shows steady replies and Wireshark shows request/reply pairs.*
+
+<p align="center">
+<img src="07-continuous-ping-working.png" width="80%" alt="Continuous ping with replies from linux-vm"/>
+</p>
+
+**10. Block inbound ICMP on the Ubuntu VM's NSG**
+1. In the Azure portal, open `linux-vm` and click **[Networking / Network settings]**.
+2. Click **Add inbound port rule** and enter: Source `Any`, Source port ranges `*`, Destination `Any`, Service `Custom`, Destination port ranges `*`, Protocol `ICMP`, Action `Deny`, Priority `290`, Name `DenyICMP`.
+3. Click **Add**.
+
+*Expected result: the new deny rule appears in the inbound rules list above the default rules.*
+
+<p align="center">
+<img src="08-nsg-deny-icmp-rule.png" width="80%" alt="Creating the inbound deny rule for ICMP"/>
+</p>
+
+**11. Observe the blocked traffic**
+1. Return to the Windows VM and watch the ping window and Wireshark.
+
+*Expected result: [what you saw, e.g. after about a minute the ping shows "Request timed out" and Wireshark shows echo requests with no replies].*
+
+<p align="center">
+<img src="09-ping-blocked.png" width="80%" alt="Ping timing out and Wireshark showing requests without replies"/>
+</p>
+
+**12. Restore ICMP and stop the ping**
+1. Back in the NSG, [delete the deny rule / change its action to Allow].
+2. Return to the Windows VM and watch the ping window and Wireshark.
+
+*Expected result: [what you saw, e.g. replies resume in the command prompt and Wireshark].*
+
+3. Press **Ctrl+C** in the command prompt to stop the ping.
+
+<p align="center">
+<img src="10-ping-restored.png" width="80%" alt="Ping replies resuming after the NSG rule was removed"/>
+</p>
+
+**What I observed:** [your own explanation, see below]
 <br />
