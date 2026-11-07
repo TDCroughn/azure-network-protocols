@@ -81,14 +81,14 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 *Expected result: Wireshark opens from the Start menu.*
 
 **7. Capture ICMP traffic to the Ubuntu VM**
-1. Open Wireshark and double-click the **[adapter name]** interface to start a capture.
+1. Open Wireshark and double-click the **ethernet** interface to start a capture.
 2. In the display filter bar, type `icmp` and press **Enter**.
-3. Open Command Prompt and run `ping [linux-vm private IP]`.
+3. Open Command Prompt and run `ping 172.16.0.5`.
 
-*Expected result: the command prompt shows four replies, and Wireshark lists matching **Echo (ping) request** and **Echo (ping) reply** pairs between `[windows-vm IP]` and `[linux-vm IP]`.*
+*Expected result: the command prompt shows four replies, and Wireshark lists matching **Echo (ping) request** and **Echo (ping) reply** pairs between `172.16.0.4` and `172.16.0.5`.*
 
 <p align="center">
-<img src="05-icmp-ping-linux-vm.png" width="80%" alt="Wireshark showing ICMP echo requests and replies to the Ubuntu VM"/>
+<img src="ICMP Ping From Windows to Linux.png" width="80%" alt="Wireshark showing ICMP echo requests and replies to the Ubuntu VM"/>
 </p>
 
 **8. Ping a public website**
